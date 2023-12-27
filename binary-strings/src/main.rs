@@ -9,13 +9,15 @@ fn main() {
 }
 
 fn count_possible_binary_strings(n: usize) -> usize {
-    if n == 1 {
-        2
-    } else if n == 2 {
-        3
-    } else {
-        count_possible_binary_strings(n - 1) + count_possible_binary_strings(n - 2)
+    let mut dp_table = vec![0; n + 1];
+    dp_table[1] = 2;
+    dp_table[2] = 3;
+
+    for i in 3..=n {
+        dp_table[i] = dp_table[i - 1] + dp_table[i - 2];
     }
+
+    dp_table[n]
 }
 
 fn parse_input() -> usize {
